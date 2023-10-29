@@ -24,7 +24,6 @@ class Campeonato
         end
     end
 
-
     def gerarDuelos()
         participantes = @lista_participantes
         duelos = []
@@ -40,4 +39,18 @@ class Campeonato
         return @duelos
     end
 
+    def showDuelos()
+        @duelos.each do |d|
+            cont = 0
+            d.each do |p|
+                if cont < 1
+                    print "#{p.nome} x "
+                else
+                    print "#{p.nome}"
+                end
+                cont += 1
+            end
+            puts ""
+        end
+    end
 end

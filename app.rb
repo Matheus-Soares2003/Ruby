@@ -27,8 +27,8 @@ camp.qtd_participantes.times do
     camp.addParticipante(participante)
 end
 
-camp.gerarDuelos.each do |v|
-    print v
-end
+
+camp.gerarDuelos.each
+camp.showDuelos
 
 
