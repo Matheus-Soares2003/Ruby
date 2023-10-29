@@ -1,12 +1,13 @@
 class Campeonato
 
     attr_accessor :titulo, :qtd_participantes, :lista_participantes
+    attr_reader :duelos
 
     def initialize(titulo:, qtd_participantes:)
         @titulo = titulo
         @qtd_participantes = qtd_participantes
         @lista_participantes = []
-        @fases = {}
+        @duelos = []
     end
 
     def addParticipante(participante)
@@ -23,28 +24,20 @@ class Campeonato
         end
     end
 
-    def gerarFases()
-        case @qtd_participantes
-            when 32
-                @fases = {final: [], semifinal: [], quartas: [], oitavas: [], fases_iniciais: []}
-            when 16
-                @fases = {final: [], semifinal: [], quartas: [], oitavas: []}
-            when 8
-                @fases = {final: [], semifinal: [], quartas: []}
-            when 4
-                @fases = {final: [], semifinal: []}
-            when 2 
-                @fases = {final: []}
-        end
-        
-    end
 
     def gerarDuelos()
-        gerarFases
-        @fases.each do |k, v|
-            @fases[k].push("Teste")
+        participantes = @lista_participantes
+        duelos = []
+        while participantes.length > 0
+            indice = rand(participantes.length)
+            duelos.push(participantes[indice])
+            if duelos.length % 2 == 0
+                @duelos.push(duelos.clone)
+                duelos.clear()
+            end
+            participantes.delete(participantes[indice])
         end
-        return @fases
+        return @duelos
     end
 
 end
